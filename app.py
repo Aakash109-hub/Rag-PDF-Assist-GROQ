@@ -8,14 +8,23 @@ from langchain_groq import ChatGroq
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 import uuid
+import logging
 
-# Fetch the API key from environment variables
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
+if os.getenv("RENDER") is None:
+    from dotenv import load_dotenv
+    load_dotenv()
+
+# Load environment variables
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 if not GROQ_API_KEY:
-    st.error("❌ GROQ API key is missing! Set it in the Render environment variables.")
+    st.error("❌ GROQ API key is missing! Set it in `.env` or Render environment variables.")
+    st.info("💡 Create a `.env` file in the root directory and add: `GROQ_API_KEY=your_api_key_here`")
     st.stop()
 else:
-    print(f"✅ API Key Loaded: {GROQ_API_KEY[:4]}********")  # Masked for security
+    logging.info(f"✅ API Key Loaded: {GROQ_API_KEY[:4]}********")
 
 # Session management
 if "session_id" not in st.session_state:
@@ -91,6 +100,4 @@ def main():
                 st.success("Done")
 
 if __name__ == "__main__":
-    # Use Render's PORT environment variable
-    port = int(os.getenv("PORT", 8501))
-    st.run(port=port)
+    main()
