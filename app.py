@@ -5,7 +5,7 @@ import os
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
-from langchain.chains.question_answering import load_qa_chain
+from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 import uuid
 import logging
@@ -65,17 +65,16 @@ def get_conversational_chain():
     """
     llm = ChatGroq(model="deepseek-r1-distill-llama-70b", temperature=0.3)
     prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
-    chain = load_qa_chain(llm, chain_type="stuff", prompt=prompt)
-    return chain
+    return RetrievalQA.from_chain_type(llm=llm, retriever=None, chain_type="stuff", chain_type_kwargs={"prompt": prompt})
+
 
 def user_input(user_question, session_id):
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
     st.warning("Loading FAISS index with deserialization enabled. Ensure the file is from a trusted source.")
     new_db = FAISS.load_local(
-        f"faiss_index_{session_id}",
-        embeddings,
-        allow_dangerous_deserialization=True  # Enable deserialization
-    )
+    f"faiss_index_{session_id}",
+    embeddings)
+
     docs = new_db.similarity_search(user_question)
     chain = get_conversational_chain()
     response = chain({"input_documents": docs, "question": user_question}, return_only_outputs=True)
