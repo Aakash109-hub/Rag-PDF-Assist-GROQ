@@ -7,22 +7,15 @@ from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
-from dotenv import load_dotenv
 import uuid
-import logging
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-
-# Load environment variables
-load_dotenv()
+# Fetch the API key from environment variables
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 if not GROQ_API_KEY:
-    st.error("❌ GROQ API key is missing! Set it in `.env` or Render environment variables.")
-    st.info("💡 Create a `.env` file in the root directory and add: `GROQ_API_KEY=your_api_key_here`")
+    st.error("❌ GROQ API key is missing! Set it in the Render environment variables.")
     st.stop()
 else:
-    logging.info(f"✅ API Key Loaded: {GROQ_API_KEY[:4]}********")
+    print(f"✅ API Key Loaded: {GROQ_API_KEY[:4]}********")  # Masked for security
 
 # Session management
 if "session_id" not in st.session_state:
@@ -98,4 +91,6 @@ def main():
                 st.success("Done")
 
 if __name__ == "__main__":
-    main()
+    # Use Render's PORT environment variable
+    port = int(os.getenv("PORT", 8501))
+    st.run(port=port)
