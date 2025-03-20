@@ -24,7 +24,7 @@ This project is a **Retrieval-Augmented Generation (RAG) based chatbot** that al
 ## 📌 Setup & Installation
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/your-username/rag-pdf-chatbot.git
+git clone https://github.com/Aakash109-hub/Rag-PDF-Assist-GROQ.git
 cd rag-pdf-chatbot
 ```
 
