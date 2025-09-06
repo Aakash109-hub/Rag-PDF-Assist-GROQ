@@ -73,6 +73,6 @@ streamlit run app.py
 - **Live Demo**: [https://groq-chat-ak.onrender.com]
 
 ## 📬 Contact
-If you have any questions, feel free to reach out!
+If you have any questions, feel free to reach out
 
 🔗 LinkedIn: [[Your LinkedIn Profile](https://www.linkedin.com/in/aakashgayke109/)]  
