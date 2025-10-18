@@ -75,4 +75,4 @@ streamlit run app.py
 ## 📬 Contact
 If you have any questions, feel free to reach out!
 
-🔗 LinkedIn: [[Your LinkedIn Profile](https://www.linkedin.com/in/aakashgayke109/)]  
+🔗 LinkedIn: [(https://www.linkedin.com/in/aakashgayke109/)]  
