@@ -1,25 +1,3 @@
-chunk_size=800, chunk_overlap=160)
-    texts = text_splitter.split_documents(docs)
-    return texts
-
-
-def build_vector_store(texts, embeddings, index_path):
-    """Build and save FAISS vector store."""
-    embedding_size = len(embeddings.embed_query("hello"))
-    index = faiss.IndexFlatL2(embedding_size)
-
-    vector_store = FAISS(
-        embedding_function=embeddings,
-        index=index,
-        docstore=InMemoryDocstore(),
-        index_to_docstore_id={}
-    )
-    vector_store.add_documents(texts)
-
-    os.makedirs(index_path, exist_ok=True)
-    vector_store.save_local(index_path)
-    return vector_store
-
 
 def load_vector_store(index_path, embeddings):
     """Load FAISS index safely."""
