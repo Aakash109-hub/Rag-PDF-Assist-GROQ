@@ -17,3 +17,7 @@ PyMuPDF
 
 # UI
 streamlit
+python-dotenv
+
+#useful utilities
+tqdm
