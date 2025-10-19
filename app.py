@@ -1,28 +1,4 @@
-import streamlit as st
-import os
-import faiss
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.docstore.in_memory import InMemoryDocstore
-from langchain_community.vectorstores import FAISS
-from langchain_groq import ChatGroq
-from dotenv import load_dotenv
-
-
-# Load environment variables
-load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-if not GROQ_API_KEY:
-    st.error("❌ GROQ API key is missing! Set it in `.env` or Render environment variables.")
-    st.info("💡 Create a `.env` file in the root directory and add: `GROQ_API_KEY=your_api_key_here`")
-    st.stop()
-
-def load_and_split(file_path):
-    """Load PDF and split into text chunks."""
-    loader = PyPDFLoader(file_path)
-    docs = loader.load()
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=160)
+chunk_size=800, chunk_overlap=160)
     texts = text_splitter.split_documents(docs)
     return texts
 
