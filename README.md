@@ -2,7 +2,6 @@
 
 ## 🚀 Overview
 This project is a **Retrieval-Augmented Generation (RAG) based chatbot** that allows users to query PDFs using **natural language**. The chatbot extracts text from uploaded PDF files, processes it into vector embeddings, and provides relevant answers using an **LLM (Large Language Model) powered by Groq API**.
-
 ## 🛠 Tech Stack
 - **Python**
 - **LangChain** (for retrieval and chaining)
