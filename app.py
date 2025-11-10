@@ -37,6 +37,8 @@ def load_and_split(file_path):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=160)
     return text_splitter.split_documents(docs)
 
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
 def build_vector_store(texts, embeddings, index_path):
     """Build and save FAISS vector store."""
     embedding_size = len(embeddings.embed_query("hello"))
