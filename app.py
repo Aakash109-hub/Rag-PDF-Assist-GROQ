@@ -165,8 +165,6 @@ with col1:
         base_name = os.path.splitext(uploaded_file.name)[0]
         index_path = os.path.join(PERSIST_DIR, f"{base_name}_index")
 
-        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-
         with st.spinner("🔍 Loading or creating FAISS index..."):
             vector_store = load_vector_store(index_path, embeddings)
             if vector_store:
