@@ -13,7 +13,6 @@ faiss-cpu
 
 # PDF handling
 pypdf
-PyMuPDF
 
 # UI
 streamlit
